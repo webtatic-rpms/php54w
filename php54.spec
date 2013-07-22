@@ -27,7 +27,7 @@
 Summary: PHP scripting language for creating dynamic web sites
 Name: php54w
 Version: 5.4.17
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: PHP
 Group: Development/Languages
 URL: http://www.php.net/
@@ -998,20 +998,29 @@ for mod in pgsql mysql mysqli odbc ldap snmp xmlrpc imap \
     enchant phar fileinfo intl \
     mcrypt tidy pdo_dblib mssql pspell curl wddx \
     posix shmop sysvshm sysvsem sysvmsg recode xml; do
-    cat > $RPM_BUILD_ROOT%{_sysconfdir}/php.d/${mod}.ini <<EOF
+
+    # Make sure wddx is loaded after the xml extension, which it depends on
+    if [ "$mod" = "wddx" ]
+    then
+        ini=xml_${mod}.ini
+    else
+        ini=${mod}.ini
+    fi
+
+    cat > $RPM_BUILD_ROOT%{_sysconfdir}/php.d/${ini} <<EOF
 ; Enable ${mod} extension module
 extension=${mod}.so
 EOF
 %if %{with_zts}
-    cp $RPM_BUILD_ROOT%{_sysconfdir}/php.d/${mod}.ini \
-       $RPM_BUILD_ROOT%{_sysconfdir}/php-zts.d/${mod}.ini
+    cp $RPM_BUILD_ROOT%{_sysconfdir}/php.d/${ini} \
+       $RPM_BUILD_ROOT%{_sysconfdir}/php-zts.d/${ini}
 %endif
     cat > files.${mod} <<EOF
 %attr(755,root,root) %{_libdir}/php/modules/${mod}.so
-%config(noreplace) %attr(644,root,root) %{_sysconfdir}/php.d/${mod}.ini
+%config(noreplace) %attr(644,root,root) %{_sysconfdir}/php.d/${ini}
 %if %{with_zts}
 %attr(755,root,root) %{_libdir}/php-zts/modules/${mod}.so
-%config(noreplace) %attr(644,root,root) %{_sysconfdir}/php-zts.d/${mod}.ini
+%config(noreplace) %attr(644,root,root) %{_sysconfdir}/php-zts.d/${ini}
 %endif
 EOF
 done
@@ -1193,7 +1202,10 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
-* Sat Jul 21 2013 Andy Thompson <andy@webtatic.com> - 5.4.17-2
+* Mon Jul 22 2013 Andy Thompson <andy@webtatic.com> - 5.4.17-3
+- Make sure wddx is loaded after the xml extension, which it depends on
+
+* Sat Jul 20 2013 Andy Thompson <andy@webtatic.com> - 5.4.17-2
 - Add provides for php54w-* for all PHP extensions.
 - Remove provides for shared extension .so files.
 - Add patch for bug #65236
