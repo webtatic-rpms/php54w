@@ -1133,6 +1133,9 @@ fi
 %{_bindir}/phar.phar
 %{_bindir}/phar
 %{_mandir}/man1/php.1*
+%{_mandir}/man1/php-cgi.1*
+%{_mandir}/man1/phar.phar.1*
+%{_mandir}/man1/phar.1*
 %doc sapi/cgi/README* sapi/cli/README
 
 %if %{with_fpm}
@@ -1205,6 +1208,7 @@ fi
 %changelog
 * Sun Aug 18 2013 Andy Thompson <andy@webtatic.com> - 5.4.18-1
 - updated to php-5.4.18
+- Package added man pages
 - Remove patch for bug #65236 fixed in the upstream project
 - Add patch for bug #65460
 
