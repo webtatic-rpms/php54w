@@ -49,7 +49,6 @@ Patch7: php-5.3.0-recode.patch
 Patch8: php-5.4.7-libdb.patch
 
 # Fixes for extensions
-Patch20: php-5.3.27-bug65236.patch
 
 # Functional changes
 Patch40: php-5.0.4-dlopen.patch
@@ -562,8 +561,6 @@ support for using the enchant library to PHP.
 %patch6 -p1 -b .embed
 %patch7 -p1 -b .recode
 %patch8 -p1 -b .libdb
-
-%patch20 -p1 -b .bug65236
 
 %patch40 -p1 -b .dlopen
 %patch41 -p1 -b .easter
