@@ -1201,6 +1201,10 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Sun Aug 18 2013 Andy Thompson <andy@webtatic.com> - 5.4.18-1
+- updated to php-5.4.18
+- Remove patch for bug #65236 fixed in the upstream project
+
 * Mon Jul 22 2013 Andy Thompson <andy@webtatic.com> - 5.4.17-3
 - Make sure wddx is loaded after the xml extension, which it depends on
 - Add explicit mysql sock definition for mysqlnd
