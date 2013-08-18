@@ -47,6 +47,7 @@ Patch5: php-5.2.0-includedir.patch
 Patch6: php-5.2.4-embed.patch
 Patch7: php-5.3.0-recode.patch
 Patch8: php-5.4.7-libdb.patch
+Patch9: php-5.4.18-bisonztsdup.patch
 
 # Fixes for extensions
 
@@ -561,6 +562,7 @@ support for using the enchant library to PHP.
 %patch6 -p1 -b .embed
 %patch7 -p1 -b .recode
 %patch8 -p1 -b .libdb
+%patch9 -p1 -b .bisonztsdup
 
 %patch40 -p1 -b .dlopen
 %patch41 -p1 -b .easter
@@ -1204,6 +1206,7 @@ fi
 * Sun Aug 18 2013 Andy Thompson <andy@webtatic.com> - 5.4.18-1
 - updated to php-5.4.18
 - Remove patch for bug #65236 fixed in the upstream project
+- Add patch for bug #65460
 
 * Mon Jul 22 2013 Andy Thompson <andy@webtatic.com> - 5.4.17-3
 - Make sure wddx is loaded after the xml extension, which it depends on
