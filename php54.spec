@@ -27,7 +27,7 @@
 
 Summary: PHP scripting language for creating dynamic web sites
 Name: php54w
-Version: 5.4.23
+Version: 5.4.24
 Release: 1%{?dist}
 License: PHP
 Group: Development/Languages
@@ -1204,6 +1204,9 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Sun Jan 12 2014 Andy Thompson <andy@webtatic.com> - 5.4.24-1
+- updated to php-5.4.24
+
 * Fri Dec 13 2013 Andy Thompson <andy@webtatic.com> - 5.4.23-1
 - updated to php-5.4.23
 
