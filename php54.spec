@@ -28,6 +28,8 @@
 # Build ZTS extension or only NTS
 %global with_zts      1
 
+%global with_dtrace 1
+
 Summary: PHP scripting language for creating dynamic web sites
 Name: php54w
 Version: 5.4.24
@@ -94,6 +96,10 @@ Requires: %{name}-common = %{version}-%{release}
 Requires: %{name}-cli = %{version}-%{release}
 # To ensure correct /var/lib/php/session ownership:
 Requires(pre): httpd
+
+%if %{with_dtrace}
+BuildRequires: systemtap-sdt-devel
+%endif
 
 %if %{with_zts}
 # obsolete and provide ZTS
@@ -690,29 +696,33 @@ build() {
 mkdir Zend && cp ../Zend/zend_{language,ini}_{parser,scanner}.[ch] Zend
 ln -sf ../configure
 %configure \
-	--cache-file=../config.cache \
-        --with-libdir=%{_lib} \
-	--with-config-file-path=%{_sysconfdir} \
-	--with-config-file-scan-dir=%{_sysconfdir}/php.d \
-	--disable-debug \
-	--with-pic \
-	--disable-rpath \
-	--without-pear \
-	--with-exec-dir=%{_bindir} \
-	--with-freetype-dir=%{_prefix} \
-	--with-png-dir=%{_prefix} \
-	--with-xpm-dir=%{_prefix} \
-	--enable-gd-native-ttf \
-	--without-gdbm \
-	--with-jpeg-dir=%{_prefix} \
-	--with-openssl \
-        --with-pcre-regex \
-	--with-zlib \
-	--with-layout=GNU \
-	--with-kerberos \
-        --with-libxml-dir=%{_prefix} \
-        --with-system-tzdata \
-	$* 
+    --cache-file=../config.cache \
+    --with-libdir=%{_lib} \
+    --with-config-file-path=%{_sysconfdir} \
+    --with-config-file-scan-dir=%{_sysconfdir}/php.d \
+    --disable-debug \
+    --with-pic \
+    --disable-rpath \
+    --without-pear \
+    --with-exec-dir=%{_bindir} \
+    --with-freetype-dir=%{_prefix} \
+    --with-png-dir=%{_prefix} \
+    --with-xpm-dir=%{_prefix} \
+    --enable-gd-native-ttf \
+    --without-gdbm \
+    --with-jpeg-dir=%{_prefix} \
+    --with-openssl \
+    --with-pcre-regex \
+    --with-zlib \
+    --with-layout=GNU \
+    --with-kerberos \
+    --with-libxml-dir=%{_prefix} \
+    --with-system-tzdata \
+    --with-mhash \
+%if %{with_dtrace}
+    --enable-dtrace \
+%endif
+    $* 
 if test $? != 0; then 
   tail -500 config.log
   : configure failed
