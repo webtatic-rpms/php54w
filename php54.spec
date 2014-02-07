@@ -91,8 +91,8 @@ Name: %{?scl_prefix}php
 %else
 Name: php54w
 %endif
-Version: 5.4.24
-Release: 2%{?dist}
+Version: 5.4.25
+Release: 1%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
@@ -1790,11 +1790,11 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
-
-* Tue Feb 12 2014 Andy Thompson <andy@webtatic.com> - 5.4.24-2
+* Fri Feb 07 2014 Andy Thompson <andy@webtatic.com> - 5.4.25-1
 - Update from el7 php package.
 - Updates include dtrace probes, mhash extension emulation
 - Support el7 builds
+- Update to support SCL
 
 * Sun Jan 12 2014 Andy Thompson <andy@webtatic.com> - 5.4.24-1
 - updated to php-5.4.24
