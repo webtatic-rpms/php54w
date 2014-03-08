@@ -91,7 +91,7 @@ Name: %{?scl_prefix}php
 %else
 Name: php54w
 %endif
-Version: 5.4.25
+Version: 5.4.26
 Release: 1%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
@@ -1790,6 +1790,9 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Sat Mar 08 2014 Andy Thompson <andy@webtatic.com> - 5.4.26-1
+- updated to php-5.4.26
+
 * Fri Feb 07 2014 Andy Thompson <andy@webtatic.com> - 5.4.25-1
 - Update from el7 php package.
 - Updates include dtrace probes, mhash extension emulation
