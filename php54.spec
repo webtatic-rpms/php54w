@@ -91,7 +91,7 @@ Name: %{?scl_prefix}php
 %else
 Name: php54w
 %endif
-Version: 5.4.28
+Version: 5.4.29
 Release: 1%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
@@ -1790,6 +1790,10 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Sat May 31 2014 Andy Thompson <andy@webtatic.com> - 5.4.29-1
+- updated to php-5.4.29
+- Update the php-fpm config comment to state listen.mode default is 0660
+
 * Fri May 02 2014 Andy Thompson <andy@webtatic.com> - 5.4.28-1
 - updated to php-5.4.28
 
