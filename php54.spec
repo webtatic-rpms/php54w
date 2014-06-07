@@ -92,7 +92,7 @@ Name: %{?scl_prefix}php
 Name: php54w
 %endif
 Version: 5.4.29
-Release: 1%{?dist}
+Release: 2%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
@@ -139,6 +139,7 @@ Patch47: php-5.4.9-phpinfo.patch
 # Fixes for tests
 
 # Bug fixes
+Patch100: php-5.4.29-unserialize-bc.patch
 
 # Security fixes
 
@@ -938,6 +939,8 @@ support for using the enchant library to PHP.
 %endif
 %patch46 -p1 -b .fixheader
 %patch47 -p1 -b .phpinfo
+
+%patch100 -p1 -b .unserialize-bc
 
 # Prevent %%doc confusion over LICENSE files
 cp Zend/LICENSE Zend/ZEND_LICENSE
@@ -1790,6 +1793,9 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Sat Jun 07 2014 Andy Thompson <andy@webtatic.com> - 5.4.29-2
+- Add patch for regression in bug #67072
+
 * Sat May 31 2014 Andy Thompson <andy@webtatic.com> - 5.4.29-1
 - updated to php-5.4.29
 - Update the php-fpm config comment to state listen.mode default is 0660
