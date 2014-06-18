@@ -141,7 +141,6 @@ Patch47: php-5.4.9-phpinfo.patch
 # Fixes for tests
 
 # Bug fixes
-Patch100: php-5.4.29-unserialize-bc.patch
 
 # Security fixes
 
@@ -941,8 +940,6 @@ support for using the enchant library to PHP.
 %endif
 %patch46 -p1 -b .fixheader
 %patch47 -p1 -b .phpinfo
-
-%patch100 -p1 -b .unserialize-bc
 
 # Prevent %%doc confusion over LICENSE files
 cp Zend/LICENSE Zend/ZEND_LICENSE
@@ -1797,6 +1794,7 @@ fi
 %changelog
 * Wed Jun 18 2014 Andy Thompson <andy@webtatic.com> - 5.4.30-0.1
 - updated to php-5.4.30
+- remove patch for regression in bug #67072 now fixed upstream
 
 * Sat Jun 07 2014 Andy Thompson <andy@webtatic.com> - 5.4.29-2
 - Add patch for regression in bug #67072
