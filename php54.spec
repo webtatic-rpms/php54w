@@ -85,8 +85,6 @@
 %global db_devel  libdb-devel
 %endif
 
-%global rcver RC1
-
 Summary: PHP scripting language for creating dynamic web sites
 %if 0%{?scl:1}
 Name: %{?scl_prefix}php
@@ -94,7 +92,7 @@ Name: %{?scl_prefix}php
 Name: php54w
 %endif
 Version: 5.4.30
-Release: 0.1%{?rcver:.%{rcver}}%{?dist}
+Release: 1%{?rcver:.%{rcver}}%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
@@ -1792,7 +1790,7 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
-* Wed Jun 18 2014 Andy Thompson <andy@webtatic.com> - 5.4.30-0.1
+* Fri Jun 27 2014 Andy Thompson <andy@webtatic.com> - 5.4.30-1
 - updated to php-5.4.30
 - remove patch for regression in bug #67072 now fixed upstream
 
