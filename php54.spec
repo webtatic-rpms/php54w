@@ -92,7 +92,7 @@ Name: %{?scl_prefix}php
 Name: php54w
 %endif
 Version: 5.4.33
-Release: 1%{?rcver:.%{rcver}}%{?dist}
+Release: 2%{?rcver:.%{rcver}}%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
@@ -1041,6 +1041,11 @@ rm -f TSRM/tsrm_win32.h \
 find . -name \*.[ch] -exec chmod 644 {} \;
 chmod 644 README.*
 
+%if 0%{?fedora} >= 14 || 0%{?rhel} >= 7
+# php-fpm configuration files for tmpfiles.d
+echo "d %{_localstatedir}/run/php-fpm 755 root root" >php-fpm.tmpfiles
+%endif
+
 # bring in newer config.guess and config.sub for aarch64 support
 cp -f /usr/lib/rpm/config.{guess,sub} .
 
@@ -1425,6 +1430,9 @@ sed -e 's:/var/lib:%{_localstatedir}/lib:' \
     -i $RPM_BUILD_ROOT%{_sysconfdir}/php-fpm.d/www.conf
 mv $RPM_BUILD_ROOT%{_sysconfdir}/php-fpm.conf.default .
 %if 0%{?fedora} >= 15 || 0%{?rhel} >= 7
+# tmpfiles.d
+install -m 755 -d $RPM_BUILD_ROOT%{_prefix}/lib/tmpfiles.d
+install -m 644 php-fpm.tmpfiles $RPM_BUILD_ROOT%{_prefix}/lib/tmpfiles.d/php-fpm.conf
 sed -e "s/daemonise = yes/daemonise = no/" \
     -i $RPM_BUILD_ROOT%{_sysconfdir}/php-fpm.conf
 # install systemd unit files and scripts for handling server startup
@@ -1722,6 +1730,7 @@ fi
 %config(noreplace) %{_sysconfdir}/sysconfig/php-fpm
 
 %if 0%{?fedora} >= 14 || 0%{?rhel} >= 7
+%{_prefix}/lib/tmpfiles.d/php-fpm.conf
 %{_unitdir}/%{?scl_prefix}php-fpm.service
 %else
 %{_root_initddir}/%{?scl_prefix}php-fpm
@@ -1790,6 +1799,9 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Thu Oct 02 2014 Andy Thompson <andy@webtatic.com> - 5.4.33-2
+- Add tmpfiles.d config to recreate run directory
+
 * Thu Sep 18 2014 Andy Thompson <andy@webtatic.com> - 5.4.33-1
 - update to php-5.4.33
 
