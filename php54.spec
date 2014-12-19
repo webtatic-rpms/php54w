@@ -1858,7 +1858,7 @@ fi
 * Sat Oct 26 2013 Andy Thompson <andy@webtatic.com> - 5.4.21-1
 - updated to php-5.4.21
 
-* Sun Aug 19 2013 Andy Thompson <andy@webtatic.com> - 5.4.19-1
+* Sun Aug 25 2013 Andy Thompson <andy@webtatic.com> - 5.4.19-1
 - updated to php-5.4.19
 - Remove patch for bug #65460 fixed in the upstream project
 
