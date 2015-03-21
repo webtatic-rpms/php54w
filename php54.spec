@@ -91,7 +91,7 @@ Name: %{?scl_prefix}php
 %else
 Name: php54w
 %endif
-Version: 5.4.38
+Version: 5.4.39
 Release: 1%{?rcver:.%{rcver}}%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
@@ -1799,6 +1799,9 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Sat Mar 21 2015 Andy Thompson <andy@webtatic.com> - 5.4.39-1
+- update to php-5.4.39
+
 * Thu Feb 19 2015 Andy Thompson <andy@webtatic.com> - 5.4.38-1
 - update to php-5.4.38
 
