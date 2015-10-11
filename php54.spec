@@ -92,7 +92,7 @@ Name: %{?scl_prefix}php
 Name: php54w
 %endif
 Version: 5.4.45
-Release: 1%{?rcver:.%{rcver}}%{?dist}
+Release: 2%{?rcver:.%{rcver}}%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
@@ -1660,6 +1660,12 @@ if [ "$1" = 0 ] ; then
     /sbin/service %{?scl_prefix}php-fpm stop >/dev/null 2>&1
     /sbin/chkconfig --del %{?scl_prefix}php-fpm
 fi
+
+%postun fpm
+if [ "$1" -ge "1" ] ; then
+service %{?scl_prefix}php-fpm condrestart &> /dev/null || :
+fi
+
 %endif
 
 %endif
@@ -1799,6 +1805,9 @@ fi
 %files mysqlnd -f files.mysqlnd
 
 %changelog
+* Sun Oct 11 2015 Andy Thompson <andy@webtatic.com> - 5.4.45-2
+- Add php-fpm conditional restart on EL < 7
+
 * Sat Sep 05 2015 Andy Thompson <andy@webtatic.com> - 5.4.45-1
 - update to php-5.4.45
 
